@@ -1,0 +1,58 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://Main.gd" type="Script" id=1]
+
+[node name="Main" type="Node2D"]
+script = ExtResource( 1 )
+
+[node name="TabContainer" type="Node2D" parent="."]
+position = Vector2( 100, 150 )
+
+[node name="UiContainer" type="Node" parent="."]
+
+[node name="sb_byNumber" type="SpinBox" parent="UiContainer"]
+margin_left = 104.0
+margin_top = 58.0
+margin_right = 178.0
+margin_bottom = 82.0
+editable = false
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="sb_byDistance" type="SpinBox" parent="UiContainer"]
+margin_left = 239.0
+margin_top = 58.0
+margin_right = 313.0
+margin_bottom = 82.0
+max_value = 10000.0
+value = 100.0
+editable = false
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="cb_byNumber" type="CheckBox" parent="UiContainer"]
+margin_left = 78.0
+margin_top = 29.0
+margin_right = 178.0
+margin_bottom = 53.0
+text = "By Number"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="cb_byDistance" type="CheckBox" parent="UiContainer"]
+margin_left = 212.0
+margin_top = 29.0
+margin_right = 316.0
+margin_bottom = 53.0
+text = "By Distance"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[connection signal="value_changed" from="UiContainer/sb_byNumber" to="." method="_on_sb_byNumber_value_changed"]
+[connection signal="value_changed" from="UiContainer/sb_byDistance" to="." method="_on_sb_byDistance_value_changed"]
+[connection signal="toggled" from="UiContainer/cb_byNumber" to="." method="_on_cb_byNumber_toggled"]
+[connection signal="toggled" from="UiContainer/cb_byDistance" to="." method="_on_cb_byDistance_toggled"]
