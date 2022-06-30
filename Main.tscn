@@ -56,6 +56,35 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="VBoxContainer2" type="VBoxContainer" parent="UiContainer"]
+margin_left = 535.0
+margin_top = 24.0
+margin_right = 838.0
+margin_bottom = 122.0
+
+[node name="Label" type="Label" parent="UiContainer/VBoxContainer2"]
+margin_right = 303.0
+margin_bottom = 14.0
+text = "Auto Tab Insertion Mode"
+
+[node name="cb_tabInsertMode1" type="CheckBox" parent="UiContainer/VBoxContainer2"]
+margin_top = 18.0
+margin_right = 303.0
+margin_bottom = 42.0
+text = "Manual and Auto Independent"
+
+[node name="cb_tabInsertMode2" type="CheckBox" parent="UiContainer/VBoxContainer2"]
+margin_top = 46.0
+margin_right = 303.0
+margin_bottom = 70.0
+text = "Manual and Auto Coexist, normal spacing"
+
+[node name="cb_tabInsertMode3" type="CheckBox" parent="UiContainer/VBoxContainer2"]
+margin_top = 74.0
+margin_right = 303.0
+margin_bottom = 98.0
+text = "Manual and Auto Coexist, modified spacing"
+
 [node name="VBoxContainer" type="VBoxContainer" parent="UiContainer"]
 margin_left = 357.0
 margin_top = 24.0
@@ -74,7 +103,7 @@ margin_right = 135.0
 margin_bottom = 48.0
 text = "Clear Auto Tabs"
 
-[node name="btn_clearAll" type="Button" parent="UiContainer/VBoxContainer"]
+[node name="btn_clearAllTabs" type="Button" parent="UiContainer/VBoxContainer"]
 margin_top = 56.0
 margin_right = 135.0
 margin_bottom = 76.0
@@ -86,11 +115,21 @@ margin_right = 135.0
 margin_bottom = 104.0
 text = "Clear No Tab Zones"
 
+[node name="btn_clearEverything" type="Button" parent="UiContainer/VBoxContainer"]
+margin_top = 112.0
+margin_right = 135.0
+margin_bottom = 132.0
+text = "Clear Everything"
+
 [connection signal="value_changed" from="UiContainer/sb_byNumber" to="." method="_on_sb_byNumber_value_changed"]
 [connection signal="value_changed" from="UiContainer/sb_byDistance" to="." method="_on_sb_byDistance_value_changed"]
 [connection signal="toggled" from="UiContainer/cb_byNumber" to="." method="_on_cb_byNumber_toggled"]
 [connection signal="toggled" from="UiContainer/cb_byDistance" to="." method="_on_cb_byDistance_toggled"]
+[connection signal="pressed" from="UiContainer/VBoxContainer2/cb_tabInsertMode1" to="." method="_on_cb_tabInsertMode1_pressed"]
+[connection signal="pressed" from="UiContainer/VBoxContainer2/cb_tabInsertMode2" to="." method="_on_cb_tabInsertMode2_pressed"]
+[connection signal="pressed" from="UiContainer/VBoxContainer2/cb_tabInsertMode3" to="." method="_on_cb_tabInsertMode3_pressed"]
 [connection signal="pressed" from="UiContainer/VBoxContainer/btn_clearManual" to="." method="_on_btn_clearManual_pressed"]
 [connection signal="pressed" from="UiContainer/VBoxContainer/btn_clearAuto" to="." method="_on_btn_clearAuto_pressed"]
-[connection signal="pressed" from="UiContainer/VBoxContainer/btn_clearAll" to="." method="_on_btn_clearAll_pressed"]
+[connection signal="pressed" from="UiContainer/VBoxContainer/btn_clearAllTabs" to="." method="_on_btn_clearAllTabs_pressed"]
 [connection signal="pressed" from="UiContainer/VBoxContainer/btn_clearNoTabZones" to="." method="_on_btn_clearAllNoTabZones_pressed"]
+[connection signal="pressed" from="UiContainer/VBoxContainer/btn_clearEverything" to="." method="_on_btn_clearEverything_pressed"]

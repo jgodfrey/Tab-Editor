@@ -56,15 +56,16 @@ func remove_tab_at_index(index: int) -> void:
 		tab.sprite.queue_free()
 		tab_collection.remove(index)
 		
-func get_closest_tab(point: Vector2):
+func get_closest_tab(point: Vector2, type = null):
 	var close_enough_dist = 30
 	var closest_dist = 99999
 	var closest_tab = null
 	for tab in tab_collection:
-		var dist = point.distance_to(curve.interpolate_baked(tab.offset_actual))
-		if dist < closest_dist && dist <= close_enough_dist:
-			closest_tab = tab
-			closest_dist = dist
+		if type == null || tab.type == type:
+			var dist = point.distance_to(curve.interpolate_baked(tab.offset_actual))
+			if dist < closest_dist && dist <= close_enough_dist:
+				closest_tab = tab
+				closest_dist = dist
 	return closest_tab
 		
 

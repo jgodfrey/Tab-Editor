@@ -1,5 +1,10 @@
 extends Node2D
 
+# UNAWARE, Auto is unaware of Manual tabs
+# AWARE1, Auto aware of manual but cals spacing using reduced tab count (auto tabs only)
+# AWARE2, Auto aware of manual but calcs spacing using full tab count (auto and manual)
+enum INSERTION_MODES {UNAWARE, AWARE1, AWARE2}
+var insertion_mode = INSERTION_MODES.UNAWARE
 var tab_offset
 var curve_length: float
 var curve_baked_points: Array
@@ -11,6 +16,12 @@ onready var camera = $Camera2D
 
 func _ready():
 
+	var btnGroup = ButtonGroup.new()
+	$UiContainer/VBoxContainer2/cb_tabInsertMode1.group = btnGroup
+	$UiContainer/VBoxContainer2/cb_tabInsertMode2.group = btnGroup
+	$UiContainer/VBoxContainer2/cb_tabInsertMode3.group = btnGroup
+	$UiContainer/VBoxContainer2/cb_tabInsertMode1.pressed = true
+	
 	create_curve()
 	
 	tab_offset = 20 * 0.5 / curve_length
@@ -39,9 +50,12 @@ func create_curve():
 
 func get_tab_offsets_by_number(number_of_tabs):
 	var tab_pos = []
-	number_of_tabs -= TM.tab_collection.size()
+	if insertion_mode == INSERTION_MODES.AWARE1:
+		number_of_tabs -= TM.tab_collection.size()
 	if number_of_tabs > 0:
 		var dist_between = 1 / number_of_tabs
+		if insertion_mode == INSERTION_MODES.AWARE2:
+			number_of_tabs -= TM.tab_collection.size()		
 		for i in range(number_of_tabs):
 			tab_pos.append(i * dist_between + tab_offset)
 	return tab_pos
@@ -88,7 +102,7 @@ func calc_tab_stats():
 	#$UiContainer/sb_byDistance.value = curr_tab_dist
 	
 func add_no_tab_zone(mouse_point: Vector2):
-	var closest_tab = TM.get_closest_tab(mouse_point)
+	var closest_tab = TM.get_closest_tab(mouse_point, Tab.TAB_TYPE.AUTO)
 	if closest_tab:
 		var offset = closest_tab.offset_unit
 		TM.insert_no_tab_zone(offset - tab_offset * 2, offset + tab_offset * 2)
@@ -156,10 +170,28 @@ func _on_btn_clearAuto_pressed():
 	TM.remove_auto_tabs()
 	calc_tab_stats()
 
-func _on_btn_clearAll_pressed():
+func _on_btn_clearAllTabs_pressed():
 	TM.remove_all_tabs()
 	calc_tab_stats()
 
 func _on_btn_clearAllNoTabZones_pressed():
 	TM.remove_no_tab_zones()
 	update()
+	
+func _on_btn_clearEverything_pressed():
+	TM.remove_all_tabs()
+	TM.remove_no_tab_zones()	
+	calc_tab_stats()
+
+
+func _on_cb_tabInsertMode1_pressed():
+	insertion_mode = INSERTION_MODES.UNAWARE
+	print(insertion_mode)
+
+func _on_cb_tabInsertMode2_pressed():
+	insertion_mode = INSERTION_MODES.AWARE1
+	print(insertion_mode)
+
+func _on_cb_tabInsertMode3_pressed():
+	insertion_mode = INSERTION_MODES.AWARE2
+	print(insertion_mode)
