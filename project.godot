@@ -13,16 +13,25 @@ _global_script_classes=[ {
 "class": "Tab",
 "language": "GDScript",
 "path": "res://Tab.gd"
+}, {
+"base": "Reference",
+"class": "TabManager",
+"language": "GDScript",
+"path": "res://TabManager.gd"
 } ]
 _global_script_class_icons={
-"Tab": ""
+"Tab": "",
+"TabManager": ""
 }
 
 [application]
 
 config/name="Tab Editor"
 run/main_scene="res://Main.tscn"
-config/icon="res://edit.png"
+boot_splash/image="res://vector_square_icon.png"
+boot_splash/fullsize=false
+boot_splash/bg_color=Color( 0.666667, 0.666667, 0.666667, 1 )
+config/icon="res://vector_square_icon.png"
 
 [display]
 
