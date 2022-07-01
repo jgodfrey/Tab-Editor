@@ -10,7 +10,7 @@ offset = Vector2( 512, 300 )
 current = true
 
 [node name="TabContainer" type="Node2D" parent="."]
-position = Vector2( 100, 200 )
+position = Vector2( 100, 230 )
 
 [node name="UiContainer" type="Node2D" parent="."]
 
@@ -63,27 +63,34 @@ margin_right = 838.0
 margin_bottom = 122.0
 
 [node name="Label" type="Label" parent="UiContainer/VBoxContainer2"]
-margin_right = 303.0
+margin_right = 312.0
 margin_bottom = 14.0
 text = "Auto Tab Insertion Mode"
 
 [node name="cb_tabInsertMode1" type="CheckBox" parent="UiContainer/VBoxContainer2"]
 margin_top = 18.0
-margin_right = 303.0
+margin_right = 312.0
 margin_bottom = 42.0
-text = "Manual and Auto Independent"
+hint_tooltip = "Automatic insertion is unaware of manually inserted tabs."
+text = "Auto unaware of manual"
 
 [node name="cb_tabInsertMode2" type="CheckBox" parent="UiContainer/VBoxContainer2"]
 margin_top = 46.0
-margin_right = 303.0
+margin_right = 312.0
 margin_bottom = 70.0
-text = "Manual and Auto Coexist, normal spacing"
+hint_tooltip = "Automatic insertion is aware of manually
+inserted tabs and only inserts the remainder.
+Spacing calculations use the reduced tab count."
+text = "Auto aware of manual, standard spacing calc"
 
 [node name="cb_tabInsertMode3" type="CheckBox" parent="UiContainer/VBoxContainer2"]
 margin_top = 74.0
-margin_right = 303.0
+margin_right = 312.0
 margin_bottom = 98.0
-text = "Manual and Auto Coexist, modified spacing"
+hint_tooltip = "Automatic insertion is aware of manually
+inserted tabs and only inserts the remainder.
+Spacing calculations use the full tab count."
+text = "Auto aware of manual, modified spacing calc"
 
 [node name="VBoxContainer" type="VBoxContainer" parent="UiContainer"]
 margin_left = 357.0

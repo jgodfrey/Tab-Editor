@@ -98,22 +98,14 @@ func calc_tab_stats():
 	curr_tab_dist = curve_length
 	if curr_tab_count <= 0: return
 	curr_tab_dist = int(curve_length / curr_tab_count)
-	#$UiContainer/sb_byNumber.value = curr_tab_count
-	#$UiContainer/sb_byDistance.value = curr_tab_dist
 	
 func add_no_tab_zone(mouse_point: Vector2):
 	var closest_tab = TM.get_closest_tab(mouse_point, Tab.TAB_TYPE.AUTO)
 	if closest_tab:
 		var offset = closest_tab.offset_unit
 		TM.insert_no_tab_zone(offset - tab_offset * 2, offset + tab_offset * 2)
-		print(TM.no_tab_collection)
+		TM.remove_tabs([closest_tab])
 		update()
-		var offsets = []
-		for tab in TM.tab_collection:
-			offsets.append(tab.offset_unit)
-		TM.remove_auto_tabs()
-		insert_tabs_by_unit_offset(offsets)
-	
 
 
 func _unhandled_input(event):
@@ -138,10 +130,10 @@ func _draw():
 		draw_polyline(curve_baked_points, Color.black, 2, true)
 		
 	for no_tab_zone in TM.no_tab_collection:
-		var no_tab_zones = []
-		no_tab_zones.append(curve.interpolate_baked(no_tab_zone[0] * curve_length))
-		no_tab_zones.append(curve.interpolate_baked(no_tab_zone[1] * curve_length))
-		draw_polyline(no_tab_zones, Color.red, 4, true)
+		var coords = []
+		coords.append(curve.interpolate_baked(no_tab_zone[0] * curve_length))
+		coords.append(curve.interpolate_baked(no_tab_zone[1] * curve_length))
+		draw_polyline(coords, Color.red, 2, true)
 		
 
 func _on_sb_byNumber_value_changed(value):
@@ -181,17 +173,15 @@ func _on_btn_clearAllNoTabZones_pressed():
 func _on_btn_clearEverything_pressed():
 	TM.remove_all_tabs()
 	TM.remove_no_tab_zones()	
+	update()
 	calc_tab_stats()
 
 
 func _on_cb_tabInsertMode1_pressed():
 	insertion_mode = INSERTION_MODES.UNAWARE
-	print(insertion_mode)
 
 func _on_cb_tabInsertMode2_pressed():
 	insertion_mode = INSERTION_MODES.AWARE1
-	print(insertion_mode)
 
 func _on_cb_tabInsertMode3_pressed():
 	insertion_mode = INSERTION_MODES.AWARE2
-	print(insertion_mode)

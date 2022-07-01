@@ -39,16 +39,23 @@ func remove_no_tab_zones() -> void:
 	no_tab_collection.clear()
 	
 func remove_manual_tabs() -> void:
-	for i in range(tab_collection.size()-1, -1, -1): #iterate backwards
-		var tab = tab_collection[i]
+	var remove = []
+	for tab in tab_collection:
 		if tab.type == Tab.TAB_TYPE.MANUAL:
-			remove_tab_at_index(i)
-			
+			remove.append(tab)
+	remove_tabs(remove)
+	
 func remove_auto_tabs() -> void:
-	for i in range(tab_collection.size()-1, -1, -1): #iterate backwards
-		var tab = tab_collection[i]
+	var remove = []
+	for tab in tab_collection:
 		if tab.type == Tab.TAB_TYPE.AUTO:
-			remove_tab_at_index(i)
+			remove.append(tab)
+	remove_tabs(remove)	
+
+func remove_tabs(tabs: Array):
+	for tab in tabs:
+		tab.sprite.queue_free()
+		tab_collection.erase(tab)
 				
 func remove_tab_at_index(index: int) -> void:
 	if index >= 0 && index < tab_collection.size():
