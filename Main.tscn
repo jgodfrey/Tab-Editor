@@ -13,6 +13,7 @@ current = true
 position = Vector2( 100, 230 )
 
 [node name="UiContainer" type="Node2D" parent="."]
+rotation = -0.00287328
 
 [node name="sb_byNumber" type="SpinBox" parent="UiContainer"]
 margin_left = 104.0
@@ -21,9 +22,6 @@ margin_right = 178.0
 margin_bottom = 82.0
 max_value = 10000.0
 editable = false
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="sb_byDistance" type="SpinBox" parent="UiContainer"]
 margin_left = 239.0
@@ -42,9 +40,6 @@ margin_top = 29.0
 margin_right = 178.0
 margin_bottom = 53.0
 text = "By Number"
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="cb_byDistance" type="CheckBox" parent="UiContainer"]
 margin_left = 212.0
@@ -52,9 +47,6 @@ margin_top = 29.0
 margin_right = 316.0
 margin_bottom = 53.0
 text = "By Distance"
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="VBoxContainer2" type="VBoxContainer" parent="UiContainer"]
 margin_left = 535.0
@@ -92,6 +84,13 @@ inserted tabs and only inserts the remainder.
 Spacing calculations use the full tab count."
 text = "Auto aware of manual, modified spacing calc"
 
+[node name="cb_renderNoTabZones" type="CheckBox" parent="UiContainer"]
+margin_left = 539.0
+margin_top = 142.0
+margin_right = 708.0
+margin_bottom = 166.0
+text = "Render No Tab Zones"
+
 [node name="VBoxContainer" type="VBoxContainer" parent="UiContainer"]
 margin_left = 357.0
 margin_top = 24.0
@@ -128,6 +127,24 @@ margin_right = 135.0
 margin_bottom = 132.0
 text = "Clear Everything"
 
+[node name="HSliderLeft" type="HSlider" parent="UiContainer"]
+margin_left = 549.0
+margin_top = 172.0
+margin_right = 645.0
+margin_bottom = 188.0
+min_value = -0.05
+max_value = 0.05
+step = 0.0
+
+[node name="HSliderRight" type="HSlider" parent="UiContainer"]
+margin_left = 649.0
+margin_top = 172.0
+margin_right = 745.0
+margin_bottom = 188.0
+min_value = -0.05
+max_value = 0.05
+step = 0.0
+
 [connection signal="value_changed" from="UiContainer/sb_byNumber" to="." method="_on_sb_byNumber_value_changed"]
 [connection signal="value_changed" from="UiContainer/sb_byDistance" to="." method="_on_sb_byDistance_value_changed"]
 [connection signal="toggled" from="UiContainer/cb_byNumber" to="." method="_on_cb_byNumber_toggled"]
@@ -135,8 +152,11 @@ text = "Clear Everything"
 [connection signal="pressed" from="UiContainer/VBoxContainer2/cb_tabInsertMode1" to="." method="_on_cb_tabInsertMode1_pressed"]
 [connection signal="pressed" from="UiContainer/VBoxContainer2/cb_tabInsertMode2" to="." method="_on_cb_tabInsertMode2_pressed"]
 [connection signal="pressed" from="UiContainer/VBoxContainer2/cb_tabInsertMode3" to="." method="_on_cb_tabInsertMode3_pressed"]
+[connection signal="toggled" from="UiContainer/cb_renderNoTabZones" to="." method="_on_cb_renderNoTabZones_toggled"]
 [connection signal="pressed" from="UiContainer/VBoxContainer/btn_clearManual" to="." method="_on_btn_clearManual_pressed"]
 [connection signal="pressed" from="UiContainer/VBoxContainer/btn_clearAuto" to="." method="_on_btn_clearAuto_pressed"]
 [connection signal="pressed" from="UiContainer/VBoxContainer/btn_clearAllTabs" to="." method="_on_btn_clearAllTabs_pressed"]
 [connection signal="pressed" from="UiContainer/VBoxContainer/btn_clearNoTabZones" to="." method="_on_btn_clearAllNoTabZones_pressed"]
 [connection signal="pressed" from="UiContainer/VBoxContainer/btn_clearEverything" to="." method="_on_btn_clearEverything_pressed"]
+[connection signal="value_changed" from="UiContainer/HSliderLeft" to="." method="_on_HSliderLeft_value_changed"]
+[connection signal="value_changed" from="UiContainer/HSliderRight" to="." method="_on_HSliderRight_value_changed"]

@@ -16,7 +16,13 @@ func _init(p_curve:Curve2D = null, p_ui_container:Node = null):
 		ui_container = p_ui_container
 
 func insert_no_tab_zone(unit_offset_start, unit_offset_end):
-	no_tab_collection.append([unit_offset_start, unit_offset_end])
+	var p1 = unit_offset_start
+	var p2 = unit_offset_end
+	if unit_offset_end < unit_offset_start:
+		p1 = unit_offset_end
+		p2 = unit_offset_start
+		
+	no_tab_collection.append([p1, p2])
 	
 func insert_manual(p_offset_unit: float) -> void:
 	var tab = Tab.new(Tab.TAB_TYPE.MANUAL, curve, p_offset_unit)

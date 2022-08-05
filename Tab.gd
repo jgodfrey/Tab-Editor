@@ -16,6 +16,7 @@ func _init(p_type: int, p_curve: Curve2D, p_offset_unit: float):
 	type = p_type
 	
 	sprite = Sprite.new()
+	sprite.scale = Vector2(0.75, 0.75)
 	sprite.texture = tab_texture
 	var tab_width = sprite.texture.get_width()
 	
